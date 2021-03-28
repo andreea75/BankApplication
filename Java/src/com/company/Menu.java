@@ -2,15 +2,16 @@ package com.company;
 
 import java.util.Scanner;
 
-public class Menu extends Login{
+public class Menu extends Login {
 
-    public Menu(){
+    public Menu() {
 
     }
+
     public void menu() {
         Scanner scanner = new Scanner(System.in);
         char option;
-        System.out.println("\nWelcome " + username);
+        System.out.println("\nWelcome ");
         System.out.println("\n\nPlease choose one of the options below: ");
         System.out.println("A.Check my balance\nB.Add another card\nC.Show information about my card\nD.Show my transactions\nE.Exit");
 
@@ -19,17 +20,24 @@ public class Menu extends Login{
             case 'A':
                 Account account = new Account();
                 account.account();
+                menu();
                 break;
+            case 'B':
+                System.out.println("Name: ");
+                String name = scanner.next();
+                System.out.println("Card number: ");
+                String card_number = scanner.next();
+                System.out.println("Expiration date: ");
+                String expiration_date = scanner.next();
+                System.out.println("CVV code: ");
+                int cvv_code = scanner.nextInt();
+
+                new Card(name, card_number, expiration_date, cvv_code);
 
             case 'C':
-                /*System.out.println("First name: ");
-                String first_name = scanner.next();
-                System.out.println("Last name: ");
-                System.out.println("Card number: ");
-                System.out.println("Expiration date: ");*/
                 Card card = new Card();
                 card.card();
-
+                menu();
                 break;
 
             case 'D':
