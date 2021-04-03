@@ -1,6 +1,6 @@
 package com.company;
 
-public class Account {
+public class Account implements AccountService {
     double balance;
     //private double interest;
 
@@ -13,6 +13,7 @@ public class Account {
         this.balance = balance;
     }
 
+    @Override
     public void withdraw(double amount) {
         if (amount > balance) {
             System.out.println("you have insufficient founds!");
@@ -24,6 +25,7 @@ public class Account {
         }
     }
 
+    @Override
     public void deposit(double amount) {
         balance += amount;
         System.out.println("You have deposit: " + amount);
