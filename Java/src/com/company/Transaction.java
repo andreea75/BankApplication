@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.CSV.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,8 +9,7 @@ public class Transaction extends Account{
     Scanner scanner = new Scanner(System.in);
     double amount;
     int account;
-    BD bd = new BD();
-
+    ArrayList<Customer> customers = new ArrayList<>();
     public Transaction(){
     }
 
@@ -18,22 +19,27 @@ public class Transaction extends Account{
         System.out.println("\n1.Deposit\n2.Withdraw\n3.Transfer ");
         opt = scanner.nextInt();
         switch (opt) {
-            case 1 -> {
+            case 1 ->
                 MakeADeposit();
-            }
-            case 2 -> {
+
+            case 2 ->
                 MakeAWithdraw();
-            }
-            case 3 -> {
-                /*if(transaction > 0)
-                    System.out.println("Sum you deposited:" +transaction);
-                else if(transaction < 0)
-                    System.out.println("Sum you transfered: "+transaction);
-                else
-                    System.out.println("There is no transaction.");
-*/
-            }
+
+            case 3 ->
+                MakeATransfer();
         }
+    }
+
+    private void MakeATransfer() {
+        account = selectAccount();
+        if(account >= 0) {
+            System.out.println("What sum do you want to transfer?");
+            amount = scanner.nextDouble();
+            Transfer_write.WriteTransfer(amount);
+            customers.get(account).getAccount().transfer_extract(amount);
+        }
+        account = selectAccount();
+        customers.get(account).getAccount().transfer_add(amount);
     }
 
     private void MakeAWithdraw() {
@@ -41,22 +47,23 @@ public class Transaction extends Account{
         if(account >= 0) {
             System.out.println("What sum do you want to withdraw?");
             amount = scanner.nextDouble();
-            bd.getCostumer(account).getAccount().withdraw(amount);
+            Withdraw_write.WriteTransfer(amount);
+            customers.get(account).getAccount().withdraw(amount);
         }
     }
 
     private void MakeADeposit() {
-        int account = selectAccount();
+         account = selectAccount();
         if(account >= 0) {
             System.out.println("What sum do you want to deposit?");
-            double amount;
             amount = scanner.nextDouble();
-            bd.getCostumer(account).getAccount().deposit(amount);
+            Deposit_write.WriteDeposit(amount);
+            customers.get(account).getAccount().deposit(amount);
         }
+
     }
 
     public int selectAccount() {
-        ArrayList<Customer> customers = bd.getCustomers();
         if(customers.size() <= 0){
             System.out.println("No customers.");
             return -1;

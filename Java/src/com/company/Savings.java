@@ -8,6 +8,7 @@ public class Savings extends Account {
         this.setBalance(deposit);
     }
 
+    @Override
     public String toString() {
         return "Account type: " + type + "\n" +
                 "Balance: " + this.getBalance() + "\n";

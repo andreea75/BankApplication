@@ -1,22 +1,37 @@
 package com.company;
 
+import com.company.CSV.*;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
-    boolean close;
-    char option;
+    private static Menu menu;
 
     Scanner scanner = new Scanner(System.in);
-    BD bd = new BD();
     Transaction tr = new Transaction();
+    boolean close;
+    char option;
+    String choice;
+    String type;
+    ArrayList<Customer> customers = new ArrayList<>();
 
-    public Menu() {
+    private Menu(){
+
+    }
+
+    public static Menu getInstance(){
+        if (menu == null){
+            menu = new Menu();
+        }
+        return  menu;
     }
 
     public void menu() {
         System.out.println("Welcome ");
         while (!close) {
             printMenu();
+            Customers_read.ReadCustomer(customers);
             option = scanner.next().charAt(0);
             chooseAction(option);
         }
@@ -28,7 +43,10 @@ public class Menu {
                 createAccount();
                 break;
             case 'B':
-                //toString();
+
+                //Customer inf = new Customer();
+                //customer.inf
+                //inf.inf();
                 break;
 
             case 'C':
@@ -41,6 +59,16 @@ public class Menu {
                 break;
 
             case 'E':
+                System.out.println("What transactions do you want to see? (deposits/withdraws/transfers)");
+                choice = scanner.next();
+                switch (choice) {
+                    case "deposits" -> Deposit_read.ReadDeposit();
+                    case "withdraws" -> Withdraw_read.ReadWithdraw();
+                    case "transfers" -> Transfer_read.ReadTransfer();
+                }
+                break;
+
+            case 'F':
                 System.out.println("See you soon.Bye!");
                 System.exit(0);
                 break;
@@ -50,14 +78,13 @@ public class Menu {
     private void listBalance() {
         int account = tr.selectAccount();
         if (account >= 0)
-            System.out.println(bd.getCostumer(account).getAccount());
+            System.out.println(customers.get(account).getAccount());
         else
             System.out.println("Invalid account selected.");
     }
 
         private void createAccount () {
             String first_name, last_name;
-            String type;
             String card_number;
             double deposit = 0;
 
@@ -71,19 +98,19 @@ public class Menu {
             card_number = scanner.next();
 
             Account account;
-            BD bd = new BD();
             if (type.equals("checking")) {
                 account = new Checking(deposit);
             } else {
                 account = new Savings(deposit);
             }
             Customer customer = new Customer(first_name, last_name, card_number, account);
-            bd.addCustomer(customer);
+            customers.add(customer);
+            Customers_write.WriteCustomer(first_name,last_name,card_number,account);
         }
 
 
         private void printMenu () {
             System.out.println("Please choose one of the options below: ");
-            System.out.println("A.Create an account\nB.Show details about my accounts\nC.Check my balance\nD.Make a transaction\nE.Exit");
+            System.out.println("A.Create an account\nB.Show details about my accounts\nC.Check my balance\nD.Make a transaction\nE.Show information about my previous transactions\nF.Exit");
         }
     }

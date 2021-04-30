@@ -15,8 +15,7 @@ public  class Login implements LoginService {
         authoriseUser();
         loginSuccessful();
 
-        Menu menu = new Menu();
-        menu.menu();
+        Menu.getInstance().menu();
     }
 
     @Override

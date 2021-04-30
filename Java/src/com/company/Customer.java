@@ -1,8 +1,8 @@
 package com.company;
 
 public class Customer {
-    private String first_name;
-    private String last_name;
+    private  String first_name;
+    private  String last_name;
     private String card_number;
     private Account account;
 
@@ -14,12 +14,16 @@ public class Customer {
        this.account = account;
     }
 
-    public String toString() {
-        return "\nCustomer information\n" +
-                "First name: " + first_name +
-                "Last name: " + last_name +
-                "Card number: " + card_number + account ;
+    //@Override
+    public String inf() {
+        return "Customer{" +
+                "first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", card_number='" + card_number + '\'' +
+                ", account=" + account +
+                '}';
     }
+
     public Double AccountList() {
         return account.getBalance();
     }

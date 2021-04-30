@@ -7,6 +7,8 @@ public class Checking extends Account {
         super();
         this.setBalance(deposit);
     }
+
+    @Override
     public String toString(){
         return "Account type: "+ type + "\n" +
                 "Balance: " +this.getBalance() + "\n";
