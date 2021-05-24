@@ -20,12 +20,12 @@ public  class Login implements LoginService {
 
     @Override
     public void loginSuccessful() {
-        while(!username.equals("Java") || !password.equals("123"))
+        while(!username.equals("Admin") || !password.equals("java"))
         {
             System.out.println("\nYour username or password is incorrect.Please try again!\n");
-            System.out.println("\nUsername: ");
+            System.out.print("Username: ");
             username = scanner.next();
-            System.out.println("\nPassword: ");
+            System.out.print("Password: ");
             password = scanner.next();
         }
     }
@@ -33,9 +33,9 @@ public  class Login implements LoginService {
     @Override
     public void authoriseUser() {
         System.out.println("\nPlease enter your credentials ");
-        System.out.println("\nUsername: ");
+        System.out.print("Username: ");
         username = scanner.next();
-        System.out.println("\nPassword: ");
+        System.out.print("Password: ");
         password = scanner.next();
     }
 }

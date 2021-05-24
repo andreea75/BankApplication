@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/src/com/company/BD/Customer_BD.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/company/BD/Deposit_BD.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/company/BD/Transfer_BD.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/company/BD/Withdraw_BD.java" dialect="GenericSQL" />
+  </component>
+</project>
